@@ -1,9 +1,9 @@
 const express = require("express");
-const ussdRoute = require("./index");
+const ussdRoute = require("./ussd");
 const bodyParser = require("body-parser");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3009;
 
 app.listen(PORT, () => console.log(`running on localhost:${PORT}`));
 
