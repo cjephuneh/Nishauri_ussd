@@ -1,10 +1,10 @@
 const patientInfo = {
   'ABC123': {
-    name: 'John Doe',
-    age: 34,
+    name: 'Elvis Mburu',
+    age: 20,
     gender: 'Male',
-    contactNumber: '+1 234-567-8901',
-    emergencyContact: 'Jane Doe, +1 234-987-6543',
+    contactNumber: '+254708419386',
+    emergencyContact: 'Esther Wangithi, +254708339386',
     insuranceProvider: 'MedHealth Insurance',
     policyNumber: 'MH23456789',
     condition: 'Type 2 Diabetes Mellitus',
@@ -18,24 +18,26 @@ const patientInfo = {
     ],
     upcomingAppointments: [
       {
-        date: 'May 15, 2024',
+        date: 'June 26, 2024',
         time: '10:00 AM',
         doctor: 'Dr. Susan Smith, Endocrinologist',
-        location: 'MedCenter Clinic, 123 Health St., Wellness City',
+        location: 'Juja Level 5 Hospital',
         purpose: 'Routine diabetes management check-up',
+        locationPin: 'https://maps.google.com/?q=-1.0986,37.0158', // Dummy Google Maps link
       },
       {
-        date: 'May 22, 2024',
+        date: 'June 29, 2024',
         time: '2:00 PM',
         doctor: 'Dr. Neil Johnson, Cardiologist',
-        location: 'Heart Health Hospital, 456 Care Ave., Wellness City',
+        location: 'Mama Ngina Hospital',
         purpose: 'Follow-up on blood pressure and heart health',
+        locationPin: 'https://maps.google.com/?q=-1.2871,36.8278', // Dummy Google Maps link
       },
     ],
     prescriptionRefillDates: {
-      Metformin: 'June 1, 2024',
-      Lisinopril: 'June 10, 2024',
-      Atorvastatin: 'June 10, 2024',
+      Metformin: 'July 1, 2024',
+      Lisinopril: 'July 10, 2024',
+      Atorvastatin: 'July 10, 2024',
     },
     dietaryRecommendations: [
       'Follow a balanced diet low in simple sugars and saturated fats.',
@@ -52,7 +54,6 @@ const patientInfo = {
       'Next annual comprehensive diabetic evaluation due in March 2025.',
     ],
   },
-  // Add more patient information objects here if needed
 };
 
 module.exports = patientInfo;

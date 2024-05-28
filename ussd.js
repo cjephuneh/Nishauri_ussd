@@ -17,12 +17,21 @@ router.post("/", (req, res) => {
   let response = "";
   const userState = sessionState[sessionId];
 
+  // Function to get the latest appointment
+  const getLatestAppointment = (appointments) => {
+    return appointments
+      .filter(app => new Date(app.date) >= new Date())
+      .sort((a, b) => new Date(a.date) - new Date(b.date))[0];
+  };
+
+  const latestAppointment = getLatestAppointment(patient.upcomingAppointments);
+
   if (userState.step === 0) {
-    response = "CON Hi, welcome to Nishauri Health Assistant. How may I help you today?\n";
-    response += "1. Refill Prescription\n";
-    response += "2. Upcoming Appointments\n";
-    response += "3. Next Doctor to Meet\n";
-    response += "4. Hospital/Clinic Location\n";
+    response = "CON Hi, welcome to Nishauri Health Assistant 🤖. How may I assist you today?\n";
+    response += "1. 🔄 Refill Prescription\n";
+    response += "2. 📅 Upcoming Appointments\n";
+    response += "3. 👨‍⚕️ Next Doctor to Meet\n";
+    response += "4. 🏥 Hospital/Clinic Location\n";
     userState.step = 1;
   } else if (userState.step === 1) {
     switch (text) {
@@ -35,19 +44,25 @@ router.post("/", (req, res) => {
         break;
       case "2":
         const upcomingAppointments = patient.upcomingAppointments.map(
-          (appointment, index) => `${index + 1}. ${appointment.date}, ${appointment.time}\n${appointment.doctor}\n${appointment.location}\n${appointment.purpose}\n`
+          (appointment, index) => `${index + 1}. ${appointment.date}, ${appointment.time}\nDoctor: ${appointment.doctor}\nLocation: ${appointment.location}\nPurpose: ${appointment.purpose}\n📍 Location Pin: ${appointment.locationPin}\n`
         );
-        response = `CON Upcoming Appointments:\n${upcomingAppointments.join("\n")}`;
+        response = `CON 📅 Upcoming Appointments:\n${upcomingAppointments.join("\n")}`;
         userState.step = 3;
         break;
       case "3":
-        const nextAppointment = patient.upcomingAppointments[0];
-        response = `END Your next appointment is:\nDate: ${nextAppointment.date}, ${nextAppointment.time}\nDoctor: ${nextAppointment.doctor}\nLocation: ${nextAppointment.location}\nPurpose: ${nextAppointment.purpose}`;
+        if (latestAppointment) {
+          response = `END 👨‍⚕️ Your next appointment is:\nDate: ${latestAppointment.date}, ${latestAppointment.time}\nDoctor: ${latestAppointment.doctor}\nLocation: ${latestAppointment.location}\nPurpose: ${latestAppointment.purpose}\n📍 Location Pin: ${latestAppointment.locationPin}`;
+        } else {
+          response = "END No upcoming appointments found.";
+        }
         userState.step = 0;
         break;
       case "4":
-        const nextAppt = patient.upcomingAppointments[0];
-        response = `END Your next appointment is at:\n${nextAppt.location}`;
+        if (latestAppointment) {
+          response = `END 🏥 Your next appointment is at:\n${latestAppointment.location}\n📍 Location Pin: ${latestAppointment.locationPin}`;
+        } else {
+          response = "END No upcoming appointments found.";
+        }
         userState.step = 0;
         break;
       default:
@@ -59,7 +74,8 @@ router.post("/", (req, res) => {
     const medicationIndex = parseInt(text) - 1;
     if (medicationIndex >= 0 && medicationIndex < patient.currentMedications.length) {
       const medication = patient.currentMedications[medicationIndex];
-      response = `END Your ${medication.name} prescription refill date is: ${patient.prescriptionRefillDates[medication.name]}`;
+      const refillDate = patient.prescriptionRefillDates[medication.name] || "No refill date available";
+      response = `END 🔄 Your ${medication.name} prescription refill date is: ${refillDate}`;
       userState.step = 0;
       userState.subStep = 0;
     } else {
@@ -68,7 +84,7 @@ router.post("/", (req, res) => {
       userState.subStep = 0;
     }
   } else if (userState.step === 3) {
-    response = "END Thank you for using Nishauri Health Assistant.";
+    response = "END Thank you for using Nishauri Health Assistant 🤖.";
     userState.step = 0;
     userState.subStep = 0;
   }
