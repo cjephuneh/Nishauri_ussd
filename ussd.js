@@ -27,7 +27,7 @@ router.post("/", (req, res) => {
   const latestAppointment = getLatestAppointment(patient.upcomingAppointments);
 
   if (userState.step === 0) {
-    response = "CON Hi, welcome to Nishauri Health Assistant 🤖. How may I assist you today?\n";
+    response = "CON Hi, welcome to Mshauri Health Assistant 🤖. How may I assist you today?\n";
     response += "1. 🔄 Refill Prescription\n";
     response += "2. 📅 Upcoming Appointments\n";
     response += "3. 👨‍⚕️ Next Doctor to Meet\n";
@@ -84,7 +84,7 @@ router.post("/", (req, res) => {
       userState.subStep = 0;
     }
   } else if (userState.step === 3) {
-    response = "END Thank you for using Nishauri Health Assistant 🤖.";
+    response = "END Thank you for using Mshauri Health Assistant 🤖.";
     userState.step = 0;
     userState.subStep = 0;
   }

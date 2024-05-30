@@ -1,2 +1,2 @@
-# Nishauri_ussd
-ussd for nishauri
+# Mshauri_ussd
+ussd for Mshauri
