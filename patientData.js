@@ -18,7 +18,7 @@ const patientInfo = {
     ],
     upcomingAppointments: [
       {
-        date: 'June 26, 2024',
+        date: 'September 26, 2024',
         time: '10:00 AM',
         doctor: 'Dr. Susan Smith, Endocrinologist',
         location: 'Juja Level 5 Hospital',
@@ -26,7 +26,7 @@ const patientInfo = {
         locationPin: 'https://maps.google.com/?q=-1.0986,37.0158', // Dummy Google Maps link
       },
       {
-        date: 'June 29, 2024',
+        date: 'September 29, 2024',
         time: '2:00 PM',
         doctor: 'Dr. Neil Johnson, Cardiologist',
         location: 'Mama Ngina Hospital',
@@ -35,9 +35,9 @@ const patientInfo = {
       },
     ],
     prescriptionRefillDates: {
-      Metformin: 'July 1, 2024',
-      Lisinopril: 'July 10, 2024',
-      Atorvastatin: 'July 10, 2024',
+      Metformin: 'October 1, 2024',
+      Lisinopril: 'October 10, 2024',
+      Atorvastatin: 'October 10, 2024',
     },
     dietaryRecommendations: [
       'Follow a balanced diet low in simple sugars and saturated fats.',
